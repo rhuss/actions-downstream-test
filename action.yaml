@@ -43,6 +43,7 @@ runs:
                 grep -v '^./hack/' | \
                 grep -v '^./third_party' | \
                 cut -f3 -d' ' | \
+                tr ',' '\n' | \
                 sort | uniq | \
                 grep -v '^!' | \
                 `# Don't pass any of the built-in GOOS tags` \
