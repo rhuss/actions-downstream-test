@@ -42,12 +42,15 @@ runs:
                 grep -v '^./vendor/' | \
                 grep -v '^./hack/' | \
                 grep -v '^./third_party' | \
+                grep -v '^./.github' | \
                 cut -f3 -d' ' | \
                 tr ',' '\n' | \
                 sort | uniq | \
                 grep -v '^!' | \
                 `# Don't pass any of the built-in GOOS tags` \
                 grep -vE '(windows|linux|darwin)' | \
+                `# Skip the tools tag` \
+                grep -v 'tools' | \
                 tr '\n' ' ')"
         echo "Building with tags: ${tags}"
         go test -vet=off -tags "${tags}" -exec echo ./...
