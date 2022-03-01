@@ -38,6 +38,7 @@ runs:
       shell: bash
       run: |
         pushd ./src/${{ inputs.downstream-module }}
+        set +o pipefail # grep return code is 1 when no lines are found.
         tags="$(grep -I  -r '// +build' . |
                 grep -v '^./vendor/' | \
                 grep -v '^./hack/' | \
